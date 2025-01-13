@@ -45,7 +45,7 @@ function HangManGame() {
 
  return (
      <div
-         className='bg-white text-2xl flex flex-col items-center justify-center min-h-screen h-full w-screen'
+         className='bg-white text-2xl flex flex-col items-center justify-center min-h-screen h-full w-full'
      >         
             {/* win/lose message display */}
             {winner && (
