@@ -35,14 +35,8 @@ const executeLSPFunction = async (
         console.log('qui quasi')
         //@ts-ignore
         const provider = new ethers.BrowserProvider(window.lukso);
-        // await provider.send("eth_requestAccounts", []);
         const signer = await provider.getSigner();
-    
-        // Ottieni l'account collegato
-        // const signer = provider.getSigner();
-        console.log(provider,contextAccounts )
         let params = [contextAccounts[0], 1, false, '0x']
-    //   const signer = await provider.getSigner();      
       const contract = await getContractInstance(
         {
             contractAddress, 
@@ -89,7 +83,7 @@ function WinLoseMessage(
             className="absolute z-20 w-screen h-screen flex items-start justify-center bg-white"
         >
             <div
-                className="bg-white flex flex-col items-center justify-center p-3 rounded-2xl mt-40 md:mt-80"
+                className="bg-white flex flex-col items-center justify-center rounded-2xl "
             >
                 <h1 
                     className={`${ winMessage ? 'text-[#233742]' : 'text-[#233742]'} text-3xl font-bold mb-5`}
@@ -104,13 +98,14 @@ function WinLoseMessage(
                     { winMessage ? 'New Game' : 'Restart' }
                 </button>
             </div>
-            <button onClick={()=> 
+            {/* <button onClick={()=> 
                  executeLSPFunction({
                     functionName: "mint",
                     contractAddress: '0x046bfc3C8f991d96684E2916Fb51ae4B56A5B6FA',
                     contextAccounts:contextAccounts
                   })}>
-                     getNFT </button>
+                     getNFT 
+            </button> */}
         </div>
     )
 }
