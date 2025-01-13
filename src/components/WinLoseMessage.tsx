@@ -35,7 +35,7 @@ const executeLSPFunction = async (
         console.log('qui quasi')
         //@ts-ignore
         const provider = new ethers.BrowserProvider(window.lukso);
-        await provider.send("eth_requestAccounts", []);
+        // await provider.send("eth_requestAccounts", []);
         const signer = await provider.getSigner();
     
         // Ottieni l'account collegato
