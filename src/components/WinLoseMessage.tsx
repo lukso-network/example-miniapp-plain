@@ -3,7 +3,6 @@ import lsp7Json from '../json/lsp7/lsp7.json'
 import { useEffect } from "react";
 import { useGrid } from "../context/GridProvider";
 
-const {client, accounts, contextAccounts, walletConnected } = useGrid();
 
 type getContractInstanceProps = {
     contractAddress: string,
@@ -22,12 +21,14 @@ const getContractInstance = async (
 type LSPFunctionProps = {
     functionName: string,
     contractAddress: string,
+    contextAccounts:any
 }
 
 const executeLSPFunction = async (
     {
     functionName,
     contractAddress,
+    contextAccounts
     } : LSPFunctionProps
   ) => {
     try {
@@ -39,7 +40,7 @@ const executeLSPFunction = async (
     
         // Ottieni l'account collegato
         // const signer = provider.getSigner();
-        console.log(provider, client, accounts, contextAccounts, walletConnected )
+        console.log(provider,contextAccounts )
         let params = [contextAccounts[0], 1, false, '0x']
     //   const signer = await provider.getSigner();      
       const contract = await getContractInstance(
@@ -67,12 +68,16 @@ function WinLoseMessage(
     }: Props
     ) 
     {
-
+    const {
+        contextAccounts, 
+    } = useGrid();
+    
     useEffect(() => {
         if (winMessage) {
           executeLSPFunction({
             functionName: "mint",
             contractAddress: '0x046bfc3C8f991d96684E2916Fb51ae4B56A5B6FA',
+            contextAccounts:contextAccounts
           });
         }
     }, [winMessage]);
@@ -103,6 +108,7 @@ function WinLoseMessage(
                  executeLSPFunction({
                     functionName: "mint",
                     contractAddress: '0x046bfc3C8f991d96684E2916Fb51ae4B56A5B6FA',
+                    contextAccounts:contextAccounts
                   })}>
                      getNFT </button>
         </div>
