@@ -132,7 +132,7 @@ export function GridProvider({ children }: GridProviderProps) {
         setIsSearching,
       }}
     >
-      <div className="min-h-screen w-full bg-gradient-to-b from-black to-gray-900">
+      <div className="min-h-screen w-full bg-gradient-to-b">
         <div className="relative min-h-screen w-full max-w-screen-xl mx-auto p-6 flex flex-col items-center justify-center overflow-hidden">
           {/* Background Animation */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
