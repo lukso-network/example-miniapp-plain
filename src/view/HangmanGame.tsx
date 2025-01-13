@@ -60,7 +60,7 @@ function HangManGame() {
             {winner && (
                 <WinLoseMessage accounts={accounts} winMessage={true} newGame={newGame} />
             )}
-            {!winner && (
+            {loser && (
                 <WinLoseMessage accounts={accounts} winMessage={false} newGame={newGame} />
             )}
 
