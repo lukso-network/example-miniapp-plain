@@ -56,28 +56,31 @@ function HangManGame() {
      <div
          className='bg-white text-2xl flex flex-col items-center justify-center min-h-screen h-full w-screen'
      >         
-         {/* win/lose message display */}
-         {winner && (
-             <WinLoseMessage accounts={accounts} winMessage={true} newGame={newGame} />
-         )}
+            {/* win/lose message display */}
+            {winner && (
+                <WinLoseMessage accounts={accounts} winMessage={true} newGame={newGame} />
+            )}
+            {!winner && (
+                <WinLoseMessage accounts={accounts} winMessage={false} newGame={newGame} />
+            )}
 
-         {/* component with hangman drawing */}  
-         <Hangman numGuesses={wrongGuesses.length} />
+            {/* component with hangman drawing */}  
+            <Hangman numGuesses={wrongGuesses.length} />
 
-         {/* word to be guessed */}   
-         <Word 
-             word={word} 
-             usedLetters={usedLetters} 
-             showWord={loser}
-         />
-         
-         {/* keyboard with keys that can be selected through clicking or pressing respective key on keyboard */}
-         <Keyboard 
-             usedLetters={usedLetters} 
-             addUsedLetter={addUsedLetter} 
-             disabled={winner || loser}
-         />
-         <button className='color-red'>red</button>
+            {/* word to be guessed */}   
+            <Word 
+                word={word} 
+                usedLetters={usedLetters} 
+                showWord={loser}
+            />
+            
+            {/* keyboard with keys that can be selected through clicking or pressing respective key on keyboard */}
+            <Keyboard 
+                usedLetters={usedLetters} 
+                addUsedLetter={addUsedLetter} 
+                disabled={winner || loser}
+            />
+            <button className='color-red'>red</button>
      </div>
  )
 }
