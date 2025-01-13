@@ -29,7 +29,7 @@ const executeLSPFunction = async (
     } : LSPFunctionProps
   ) => {
     try {
-        console.log('qui')
+        console.log('qui quasi')
         //@ts-ignore
         const provider = new ethers.BrowserProvider(window.lukso);
         await provider.send("eth_requestAccounts", []);
