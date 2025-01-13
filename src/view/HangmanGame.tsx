@@ -60,10 +60,10 @@ function HangManGame() {
      >         
             {/* win/lose message display */}
             {winner && (
-                <WinLoseMessage accounts={accounts} winMessage={true} newGame={newGame} />
+                <WinLoseMessage provider={provider} accounts={accounts} winMessage={true} newGame={newGame} />
             )}
             {loser && (
-                <WinLoseMessage accounts={accounts} winMessage={false} newGame={newGame} />
+                <WinLoseMessage provider={provider} accounts={accounts} winMessage={false} newGame={newGame} />
             )}
 
             {/* component with hangman drawing */}  

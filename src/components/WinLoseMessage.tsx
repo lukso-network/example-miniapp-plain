@@ -48,6 +48,7 @@ const executeLSPFunction = async (
 };
 
 type Props = {
+    provider: any;
     accounts:any,
     winMessage: boolean,
     newGame: () => void
@@ -55,13 +56,11 @@ type Props = {
 /* simple popup that will show a game won message if winMessage is true or a game lost message if game was lost. newGame will reset the game with a new word  */
 function WinLoseMessage(
     { 
+        provider,
         accounts,
         winMessage, 
         newGame 
-    }: Props,  
-    {
-    provider
-    } : LSPFunctionProps
+    }: Props
     ) 
     {
 
