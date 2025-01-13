@@ -80,7 +80,7 @@ function WinLoseMessage(
 
     return (
         <div
-            className="absolute z-20 w-screen h-screen flex items-start justify-center bg-white"
+            className="absolute z-20 w-full h-full flex items-start justify-center bg-white"
         >
             <div
                 className="bg-white flex flex-col items-center justify-center rounded-2xl "
