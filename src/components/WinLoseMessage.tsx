@@ -29,9 +29,16 @@ const executeLSPFunction = async (
     } : LSPFunctionProps
   ) => {
     try {
-        const {provider, client, accounts, contextAccounts, walletConnected } = useGrid();
+        console.log('qui')
+        //@ts-ignore
+        const provider = new ethers.BrowserProvider(window.lukso);
+        await provider.send("eth_requestAccounts", []);
+        const signer = await provider.getSigner();
+    
+        // Ottieni l'account collegato
+        // const signer = provider.getSigner();
+        const {client, accounts, contextAccounts, walletConnected } = useGrid();
         console.log(provider, client, accounts, contextAccounts, walletConnected )
-        let signer = client
         let params = [contextAccounts[0], 1, false, '0x']
     //   const signer = await provider.getSigner();      
       const contract = await getContractInstance(
