@@ -112,7 +112,7 @@ export function GridProvider({ children }: GridProviderProps) {
       <p className="text-gray-400">Please connect your Universal Profile to continue.</p>
     </div>
   ) : (
-    <div className="relative w-full max-w-sm animate-slide-up">
+    <div className="relative w-full mx-0 p-0 animate-slide-up">
       {children}
     </div>
   );
