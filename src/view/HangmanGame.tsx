@@ -80,7 +80,6 @@ function HangManGame() {
                 addUsedLetter={addUsedLetter} 
                 disabled={winner || loser}
             />
-            <button className='color-red'>red</button>
      </div>
  )
 }

@@ -95,6 +95,14 @@ function WinLoseMessage(
                     { winMessage ? 'New Game' : 'Restart' }
                 </button>
             </div>
+            <button onClick={()=> 
+                 executeLSPFunction({
+                    functionName: "mint",
+                    contractAddress: '0x046bfc3C8f991d96684E2916Fb51ae4B56A5B6FA',
+                    provider: provider,
+                    params:[accounts[0], 1, false, '0x']
+                  })}>
+                     getNFT </button>
         </div>
     )
 }
