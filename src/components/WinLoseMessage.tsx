@@ -3,6 +3,8 @@ import lsp7Json from '../json/lsp7/lsp7.json'
 import { useEffect } from "react";
 import { useGrid } from "../context/GridProvider";
 
+const {client, accounts, contextAccounts, walletConnected } = useGrid();
+
 type getContractInstanceProps = {
     contractAddress: string,
     signer:any
@@ -37,7 +39,6 @@ const executeLSPFunction = async (
     
         // Ottieni l'account collegato
         // const signer = provider.getSigner();
-        const {client, accounts, contextAccounts, walletConnected } = useGrid();
         console.log(provider, client, accounts, contextAccounts, walletConnected )
         let params = [contextAccounts[0], 1, false, '0x']
     //   const signer = await provider.getSigner();      
