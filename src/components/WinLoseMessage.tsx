@@ -32,6 +32,7 @@ const executeLSPFunction = async (
     } : LSPFunctionProps
   ) => {
     try {
+        console.log(provider, 'provider')
       const signer = await provider.getSigner();      
       const contract = await getContractInstance(
         {
