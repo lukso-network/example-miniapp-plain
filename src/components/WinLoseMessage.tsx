@@ -1,10 +1,11 @@
 import { ethers } from "ethers";
 import lsp7Json from '../json/lsp7/lsp7.json'
 import { useEffect } from "react";
+import { useGrid } from "../context/GridProvider";
 
 type getContractInstanceProps = {
     contractAddress: string,
-    signer: any,
+    signer:any
 }
 
 const getContractInstance = async (
@@ -19,21 +20,20 @@ const getContractInstance = async (
 type LSPFunctionProps = {
     functionName: string,
     contractAddress: string,
-    provider: any,
-    params: any[]
 }
 
 const executeLSPFunction = async (
     {
     functionName,
     contractAddress,
-    provider,
-    params
     } : LSPFunctionProps
   ) => {
     try {
+        const {provider, client, accounts, contextAccounts, walletConnected } = useGrid();
         console.log(provider, 'provider')
-      const signer = await provider.getSigner();      
+        let signer = client
+        let params = [accounts[0], 1, false, '0x']
+    //   const signer = await provider.getSigner();      
       const contract = await getContractInstance(
         {
             contractAddress, 
@@ -48,16 +48,12 @@ const executeLSPFunction = async (
 };
 
 type Props = {
-    provider: any;
-    accounts:any,
     winMessage: boolean,
     newGame: () => void
 }
 /* simple popup that will show a game won message if winMessage is true or a game lost message if game was lost. newGame will reset the game with a new word  */
 function WinLoseMessage(
     { 
-        provider,
-        accounts,
         winMessage, 
         newGame 
     }: Props
@@ -69,11 +65,11 @@ function WinLoseMessage(
           executeLSPFunction({
             functionName: "mint",
             contractAddress: '0x046bfc3C8f991d96684E2916Fb51ae4B56A5B6FA',
-            provider: provider,
-            params:[accounts[0], 1, false, '0x']
           });
         }
     }, [winMessage]);
+
+    
 
     return (
         <div
@@ -99,8 +95,6 @@ function WinLoseMessage(
                  executeLSPFunction({
                     functionName: "mint",
                     contractAddress: '0x046bfc3C8f991d96684E2916Fb51ae4B56A5B6FA',
-                    provider: provider,
-                    params:[accounts[0], 1, false, '0x']
                   })}>
                      getNFT </button>
         </div>

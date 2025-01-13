@@ -4,20 +4,9 @@ import WinLoseMessage from '../components/WinLoseMessage'
 import Hangman from '../components/Hangman'
 import Word from '../components/Word'
 import Keyboard from '../components/Keyboard'
-import { useGrid } from '../context/GridProvider'
 
 function HangManGame() {
 
-    const {provider, client, accounts, contextAccounts, walletConnected } = useGrid();
-    function display(
-    ){
-    console.log(        
-        provider,
-        client,
-        accounts,
-        contextAccounts,
-        walletConnected,
-    )}
     let newWord: string = words[Math.floor(Math.random() * words.length)]
 
     const [ word, setWord ] = useState<string>(newWord)
@@ -60,10 +49,10 @@ function HangManGame() {
      >         
             {/* win/lose message display */}
             {winner && (
-                <WinLoseMessage provider={provider} accounts={accounts} winMessage={true} newGame={newGame} />
+                <WinLoseMessage  winMessage={true} newGame={newGame} />
             )}
             {loser && (
-                <WinLoseMessage provider={provider} accounts={accounts} winMessage={false} newGame={newGame} />
+                <WinLoseMessage  winMessage={false} newGame={newGame} />
             )}
 
             {/* component with hangman drawing */}  
@@ -82,7 +71,6 @@ function HangManGame() {
                 addUsedLetter={addUsedLetter} 
                 disabled={winner || loser}
             />
-            <button onClick={display}> display</button>
      </div>
  )
 }
