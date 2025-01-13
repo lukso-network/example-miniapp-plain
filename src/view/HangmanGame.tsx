@@ -9,13 +9,15 @@ import { useGrid } from '../context/GridProvider'
 function HangManGame() {
 
     const {provider, client, accounts, contextAccounts, walletConnected } = useGrid();
+    function display(
+    ){
     console.log(        
         provider,
         client,
         accounts,
         contextAccounts,
         walletConnected,
-    )
+    )}
     let newWord: string = words[Math.floor(Math.random() * words.length)]
 
     const [ word, setWord ] = useState<string>(newWord)
@@ -80,6 +82,7 @@ function HangManGame() {
                 addUsedLetter={addUsedLetter} 
                 disabled={winner || loser}
             />
+            <button onClick={display}> display</button>
      </div>
  )
 }
