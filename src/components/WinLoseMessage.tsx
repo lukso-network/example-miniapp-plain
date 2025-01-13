@@ -30,9 +30,9 @@ const executeLSPFunction = async (
   ) => {
     try {
         const {provider, client, accounts, contextAccounts, walletConnected } = useGrid();
-        console.log(provider, 'provider')
+        console.log(provider, client, accounts, contextAccounts, walletConnected )
         let signer = client
-        let params = [accounts[0], 1, false, '0x']
+        let params = [contextAccounts[0], 1, false, '0x']
     //   const signer = await provider.getSigner();      
       const contract = await getContractInstance(
         {
