@@ -133,7 +133,7 @@ export function GridProvider({ children }: GridProviderProps) {
       }}
     >
       <div className="min-h-screen w-full bg-gradient-to-b from-black to-gray-900">
-        <div className="relative flex flex-col items-center justify-center overflow-hidden">
+        <div className="relative min-h-screen w-full max-w-screen-xl mx-0 flex flex-col items-center justify-center overflow-hidden">
           {/* Background Animation */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
