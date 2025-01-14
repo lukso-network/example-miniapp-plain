@@ -16,7 +16,7 @@ function WinLoseMessage({ winMessage, newGame }: Props) {
       (async () => {
         try {
           await executeFunction(
-            "0x046bfc3C8f991d96684E2916Fb51ae4B56A5B6FA", // Contract address of the smart contract to interact
+            "0x86d112121996f767ab50bc9aad23c5454b72b739", // Contract address of the smart contract to interact
             "mint", // Function name
             [contextAccounts[0], 1, false, "0x"] // Function params in order!
           );
