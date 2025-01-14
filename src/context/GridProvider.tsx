@@ -113,7 +113,7 @@ export function GridProvider({ children }: GridProviderProps) {
     </div>
   ) : (
     <div className="relative w-full mx-0 p-0 animate-slide-up">
-      {children}
+      {children}help
     </div>
   );
 
