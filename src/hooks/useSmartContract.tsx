@@ -5,7 +5,7 @@ import lsp7Json from "../json/lsp7/lsp7.json";
 
 export const useSmartContract = () => {
 
-    const getProvider = (): BrowserProvider => {
+    const getProvider = async (): Promise<BrowserProvider> => {
     if (!window.lukso) {
         throw new Error("Lukso provider is not available on window object.");
     }
@@ -13,7 +13,7 @@ export const useSmartContract = () => {
     };
 
   const getSigner = useCallback(async () : Promise<JsonRpcSigner> => {
-    const browserProvider = getProvider();
+    const browserProvider = await getProvider();
     return browserProvider.getSigner();
   }, []);
 
