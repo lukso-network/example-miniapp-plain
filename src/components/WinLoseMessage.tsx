@@ -1,112 +1,52 @@
-import { ethers } from "ethers";
-import lsp7Json from '../json/lsp7/lsp7.json'
 import { useEffect } from "react";
+import { useSmartContract } from "../hooks/useSmartContract";
 import { useGrid } from "../context/GridProvider";
 
-
-type getContractInstanceProps = {
-    contractAddress: string,
-    signer:any
-}
-
-const getContractInstance = async (
-    {
-    contractAddress,
-    signer
-    }: getContractInstanceProps
-  ) =>{
-    return new ethers.Contract(contractAddress, lsp7Json.abi, signer);
-};
-
-type LSPFunctionProps = {
-    functionName: string,
-    contractAddress: string,
-    contextAccounts:any
-}
-
-const executeLSPFunction = async (
-    {
-    functionName,
-    contractAddress,
-    contextAccounts
-    } : LSPFunctionProps
-  ) => {
-    try {
-        console.log('qui quasi')
-        //@ts-ignore
-        const provider = new ethers.BrowserProvider(window.lukso);
-        const signer = await provider.getSigner();
-        let params = [contextAccounts[0], 1, false, '0x']
-      const contract = await getContractInstance(
-        {
-            contractAddress, 
-            signer
-        });
-      const tx = await contract[functionName](...params)
-      await tx.wait();
-      console.log("Transaction successful:", tx);
-    } catch (error) {
-      console.error("Transaction failed:", error);
-    }
-};
-
 type Props = {
-    winMessage: boolean,
-    newGame: () => void
-}
-/* simple popup that will show a game won message if winMessage is true or a game lost message if game was lost. newGame will reset the game with a new word  */
-function WinLoseMessage(
-    { 
-        winMessage, 
-        newGame 
-    }: Props
-    ) 
-    {
-    const {
-        contextAccounts, 
-    } = useGrid();
-    
-    useEffect(() => {
-        if (winMessage) {
-          executeLSPFunction({
-            functionName: "mint",
-            contractAddress: '0x046bfc3C8f991d96684E2916Fb51ae4B56A5B6FA',
-            contextAccounts:contextAccounts
-          });
+  winMessage: boolean;
+  newGame: () => void;
+};
+
+function WinLoseMessage({ winMessage, newGame }: Props) {
+  const { contextAccounts } = useGrid();
+  const { executeFunction } = useSmartContract();
+
+  useEffect(() => {
+    if (winMessage) {
+      (async () => {
+        try {
+          await executeFunction(
+            "0x046bfc3C8f991d96684E2916Fb51ae4B56A5B6FA", // Contract address of the smart contract to interact
+            "mint", // Function name
+            [contextAccounts[0], 1, false, "0x"] // Function params in order!
+          );
+        } catch (error) {
+          console.error("Error executing mint function:", error);
         }
-    }, [winMessage]);
+      })();
+    }
+  }, [winMessage]);
 
-    
-
-    return (
-        <div
-            className="absolute z-20 w-full h-full flex items-start justify-center bg-white"
+  return (
+    <div className="absolute z-20 w-full h-full flex items-start justify-center bg-white">
+      <div className="bg-white flex flex-col items-center justify-center rounded-2xl ">
+        <h1
+          className={`${
+            winMessage ? "text-[#233742]" : "text-[#233742]"
+          } text-3xl font-bold mb-5`}
         >
-            <div
-                className="bg-white flex flex-col items-center justify-center rounded-2xl "
-            >
-                <h1 
-                    className={`${ winMessage ? 'text-[#233742]' : 'text-[#233742]'} text-3xl font-bold mb-5`}
-                >
-                    { winMessage ? 'Congrats you won! 😸' : 'Sorry you lost! 😿' }
-                </h1>
-            
-                <button 
-                    className='bg-[#233742] text-white px-4 py-1 rounded-full mb-5'
-                    onClick={newGame}
-                >
-                    { winMessage ? 'New Game' : 'Restart' }
-                </button>
-            </div>
-            {/* <button onClick={()=> 
-                 executeLSPFunction({
-                    functionName: "mint",
-                    contractAddress: '0x046bfc3C8f991d96684E2916Fb51ae4B56A5B6FA',
-                    contextAccounts:contextAccounts
-                  })}>
-                     getNFT 
-            </button> */}
-        </div>
-    )
+          {winMessage ? "Congrats you won! 😸" : "Sorry you lost! 😿"}
+        </h1>
+
+        <button
+          className="bg-[#233742] text-white px-4 py-1 rounded-full mb-5"
+          onClick={newGame}
+        >
+          {winMessage ? "New Game" : "Restart"}
+        </button>
+      </div>
+    </div>
+  );
 }
-export default WinLoseMessage
+
+export default WinLoseMessage;
