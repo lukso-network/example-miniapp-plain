@@ -1,7 +1,7 @@
 const words: string[] = [
+    'absurd',
     // 'abruptly',
-    // 'absurd',
-    'abyss'
+    // 'abyss'
     // 'affix',
     // 'askew',
     // 'avenue',
