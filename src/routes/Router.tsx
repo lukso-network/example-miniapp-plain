@@ -9,6 +9,7 @@ const Router = [
   {
     path: '/',
     children: [
+      { path: '/', element: <Navigate to="/hangmanGame" /> },
       { path: '/hangmanGame', exact: true, element: <HangmanGame /> },
       { path: '*', element: <Navigate to="/hangmanGame" /> },
     ],
