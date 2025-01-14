@@ -112,8 +112,8 @@ export function GridProvider({ children }: GridProviderProps) {
       <p className="text-gray-400">Please connect your Universal Profile to continue.</p>
     </div>
   ) : (
-    <div className="relative w-full mx-0 p-0 animate-slide-up">
-      {children}help
+    <div className="relative w-full h-full m-0 p-0 animate-slide-up">
+      {children}
     </div>
   );
 
@@ -132,8 +132,8 @@ export function GridProvider({ children }: GridProviderProps) {
         setIsSearching,
       }}
     >
-      <div className="min-h-screen w-full bg-gradient-to-b mx-0 p-0 from-black to-gray-900">
-        <div className="relative min-h-screen w-full max-w-screen-xl mx-0 p-0 flex flex-col items-center justify-center overflow-hidden">
+      <div className="min-h-screen w-full h-full bg-gradient-to-b m-0 p-0 from-black to-gray-900">
+        <div className="relative min-h-screen w-full h-full max-w-screen-xl m-0 p-0 flex flex-col items-center justify-center overflow-hidden">
           {/* Background Animation */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
