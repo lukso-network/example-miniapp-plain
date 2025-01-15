@@ -4,8 +4,7 @@ import lsp7Json from "../json/lsp7/lsp7.json";
 import { useGrid } from "../context/GridProvider";
 
 export const useSmartContract = () => {
-  const { client, accounts, contextAccounts, walletConnected, setIsSearching } =
-    useGrid();
+  const { client, contextAccounts, walletConnected } = useGrid();
 
   const getProvider = async (): Promise<BrowserProvider> => {
     if (!window.lukso) {
