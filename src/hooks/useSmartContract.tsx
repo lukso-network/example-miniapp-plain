@@ -2,7 +2,6 @@ import { useCallback } from "react";
 import { BrowserProvider, Contract, ethers, JsonRpcSigner } from "ethers";
 import lsp7Json from "../json/lsp7/lsp7.json";
 import { useGrid } from "../context/GridProvider";
-import { parseUnits } from "viem";
 
 export const useSmartContract = () => {
   const { client, accounts, contextAccounts, walletConnected, setIsSearching } =
