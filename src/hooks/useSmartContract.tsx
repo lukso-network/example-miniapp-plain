@@ -72,7 +72,7 @@ export const useSmartContract = () => {
 
       console.log(`Encoding data for mint function with amount: ${amount}`);
       const data = contract.interface.encodeFunctionData("mint", [
-        contextAccounts[0], // Target address (mint recipient)
+        contractAddress, // Target address (mint recipient)
         ethers.parseUnits(amount.toString(), "ether"), // Amount in the correct format
       ]);
 
