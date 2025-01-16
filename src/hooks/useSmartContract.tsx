@@ -119,7 +119,10 @@ export const useSmartContract = () => {
         "0x" as string,
       ];
 
-      const data = contract.interface.encodeFunctionData("mint", mintArgs);
+      const data: string = contract.interface.encodeFunctionData(
+        "mint",
+        mintArgs
+      );
 
       // Sending the transaction via the grid provider
       console.log("Sending transaction...");
