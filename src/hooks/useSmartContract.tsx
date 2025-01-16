@@ -73,21 +73,12 @@ export const useSmartContract = () => {
       console.log(`Encoding data for mint function with amount: ${amount}`);
       const data = contract.interface.encodeFunctionData("mint", [
         contextAccounts[0], // Target address (mint recipient)
-        ethers.parseUnits(amount.toString(), "ether"), // Amount in the correct format
+        ethers.parseUnits(amount.toString(), "wei"), // Amount in the correct format
         false,
         "0x",
       ]);
 
       console.log("Encoded data:", data);
-
-      const tx = {
-        from: contextAccounts[0], // Sender address
-        to: contractAddress, // Contract address
-        data: data, // Function data
-        value: ethers.parseUnits(amount.toString(), "ether"), // Optional ETH value
-      };
-
-      console.log("Prepared transaction:", tx);
 
       // Sending the transaction via the grid provider
       console.log("Sending transaction...");
