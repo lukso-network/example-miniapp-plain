@@ -4,11 +4,8 @@ import WinLoseMessage from "../components/WinLoseMessage";
 import Hangman from "../components/Hangman";
 import Word from "../components/Word";
 import Keyboard from "../components/Keyboard";
-import { useSmartContract } from "../hooks/useSmartContract";
 
 function HangManGame() {
-  const { executeFunctionWithGridProvider } = useSmartContract(); // to test
-
   let newWord: string = words[Math.floor(Math.random() * words.length)];
 
   const [word, setWord] = useState<string>(newWord);
@@ -62,10 +59,6 @@ function HangManGame() {
 
       {/* component with hangman drawing */}
       <Hangman numGuesses={wrongGuesses.length} />
-      <button onClick={() => executeFunctionWithGridProvider()}>
-        executeFunctionWithGridProvider
-      </button>
-
       {/* word to be guessed */}
       <Word word={word} usedLetters={usedLetters} showWord={loser} />
 

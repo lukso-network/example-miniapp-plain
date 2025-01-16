@@ -30,9 +30,17 @@ export const useSmartContract = () => {
 
   {
     /**
-   this is the method to interact using ethers.js but we reccomend to use 
-  */
+   This is the method to interact with the smart contract using ethers.js. While this approach is valid,
+   we recommend using the `up-provider` for interacting with the blockchain whenever possible.
+  
+   Why use `up-provider`?
+   - Simplified integration with the Universal Profile ecosystem.
+   - Enhanced security by leveraging the UP infrastructure.
+
+   With `up-provider`, the interaction is abstracted, reducing complexity and potential errors.
+   */
   }
+
   const executeFunction = useCallback(
     async (contractAddress: string, functionName: string, params: any[]) => {
       try {
@@ -87,14 +95,15 @@ export const useSmartContract = () => {
       */
   }
 
-  const executeFunctionWithGridProvider = useCallback(async () => {
+  const executeFunctionWithUProvider = useCallback(async () => {
     try {
       if (!client || !walletConnected) {
         console.log("Client or wallet is not connected.");
         return;
       }
-      const amount = 1; // Example amount for minting
-      const contractAddress = "0x86d112121996f767ab50bc9aad23c5454b72b739";
+      const amount: number = 1; // Example amount for minting
+      const contractAddress: `0x${string}` =
+        "0x86d112121996f767ab50bc9aad23c5454b72b739"; // Example of smart contract LSP7 address already deployed
 
       console.log("Initializing provider and signer...");
       const provider = await getProvider();
@@ -129,7 +138,7 @@ export const useSmartContract = () => {
 
   return {
     executeFunction,
-    executeFunctionWithGridProvider,
+    executeFunctionWithUProvider,
     getSigner,
     getContractInstance,
   };

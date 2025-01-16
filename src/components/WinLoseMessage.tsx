@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useSmartContract } from "../hooks/useSmartContract";
-import { useGrid } from "../context/GridProvider";
 
 type Props = {
   winMessage: boolean;
@@ -8,18 +7,13 @@ type Props = {
 };
 
 function WinLoseMessage({ winMessage, newGame }: Props) {
-  const { contextAccounts } = useGrid();
-  const { executeFunction } = useSmartContract();
+  const { executeFunctionWithUProvider } = useSmartContract();
 
   useEffect(() => {
     if (winMessage) {
       (async () => {
         try {
-          await executeFunction(
-            "0x86d112121996f767ab50bc9aad23c5454b72b739", // Contract address of the smart contract to interact
-            "mint", // Function name
-            [contextAccounts[0], 1, false, "0x"] // Function params in order!
-          );
+          await executeFunctionWithUProvider();
         } catch (error) {
           console.error("Error executing mint function:", error);
         }
