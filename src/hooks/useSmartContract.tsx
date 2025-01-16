@@ -94,7 +94,7 @@ export const useSmartContract = () => {
       const txResponse = await client.sendTransaction({
         account: contextAccounts[0] as `0x${string}`,
         to: contractAddress as `0x${string}`,
-        tx,
+        data: tx,
       });
 
       console.log("Transaction response:", txResponse);
