@@ -50,6 +50,43 @@ export const useSmartContract = () => {
     [getSigner, getContractInstance]
   );
 
+  {
+    /**
+       In order to send a transaction using `up-provider`, we need to target a specific function of the smart contract,
+       In this case, the target is the `mint` function. The process involves encoding the required parameters for the
+       function in the correct order and then sending the encoded data as part of the transaction.
+      
+       @params {string} contractAddress - The address of the smart contract we want to interact with.
+       @params mintArgs - The arguments for the `mint` function, encoded in the proper format:
+         - `contextAccounts[0]` {string}: The recipient address for the minted tokens.
+         - `ethers.parseUnits(amount.toString(), "wei")` {BigNumber}: The amount to be minted, converted into the smallest
+           unit (e.g., wei or equivalent).
+         - `false` {boolean}: A flag indicating whether the recipient should be notified (default is false).
+         - `"0x"` {string}: Optional data field, typically used for extra information (default is an empty hex string).
+      
+       @example
+       Here's how we encode the data for the `mint` function and send the transaction:
+      
+       // Step 1: Encode the function data
+       const data = contract.interface.encodeFunctionData("mint", [
+         contextAccounts[0],
+         ethers.parseUnits(amount.toString(), "wei"),
+         false,
+         "0x"
+       ]);
+            
+       // Step 2: Send the transaction using the UP provider
+
+       const txResponse = await client.sendTransaction({
+         account: contextAccounts[0] as `0x${string}`, // Sender account, msg.sender
+         to: contractAddress as `0x${string}`,         // Target smart contract address
+         data: data,                                  // Encoded function data
+       });
+            
+       @returns {Promise<void>} Logs the transaction response or throws an error if the transaction fails.
+      */
+  }
+
   const executeFunctionWithGridProvider = useCallback(async () => {
     try {
       if (!client || !walletConnected) {
@@ -64,21 +101,16 @@ export const useSmartContract = () => {
       const signer = await provider.getSigner();
 
       console.log("Creating contract instance...");
-      const contract = new ethers.Contract(
-        contractAddress,
-        lsp7Json.abi,
-        signer
-      );
+      const contract = await getContractInstance(contractAddress, signer);
 
-      console.log(`Encoding data for mint function with amount: ${amount}`);
-      const data = contract.interface.encodeFunctionData("mint", [
-        contextAccounts[0], // Target address (mint recipient)
-        ethers.parseUnits(amount.toString(), "wei"), // Amount in the correct format
-        false,
-        "0x",
-      ]);
+      const mintArgs: [string, bigint, boolean, string] = [
+        contextAccounts[0] as `0x${string}`,
+        ethers.parseUnits(amount.toString(), "wei"), // Amount could be ethers or wei
+        false as boolean,
+        "0x" as string,
+      ];
 
-      console.log("Encoded data:", data);
+      const data = contract.interface.encodeFunctionData("mint", mintArgs);
 
       // Sending the transaction via the grid provider
       console.log("Sending transaction...");
