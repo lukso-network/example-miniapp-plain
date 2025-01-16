@@ -92,6 +92,8 @@ export const useSmartContract = () => {
       // Sending the transaction via the grid provider
       console.log("Sending transaction...");
       const txResponse = await client.sendTransaction({
+        account: contextAccounts[0] as `0x${string}`,
+        to: contractAddress as `0x${string}`,
         tx,
       });
 
