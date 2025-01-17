@@ -22,7 +22,7 @@ function WinLoseMessage({ winMessage, newGame }: Props) {
   }, [winMessage]);
 
   return (
-    <div className="absolute z-20 w-full flex-col h-full flex items-center justify-center bg-white">
+    <div className="absolute shadow-2xl rounded-md p-9 z-20 bg-color flex-col flex items-center justify-center bg-white">
       <h1
         className={`${
           winMessage ? "text-[#233742]" : "text-[#233742]"
