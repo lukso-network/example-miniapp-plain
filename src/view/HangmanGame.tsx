@@ -52,7 +52,7 @@ function HangManGame() {
   }
 
   return (
-    <div className="bg-white text-2xl flex flex-col items-center justify-center h-full w-full mx-0 ">
+    <div className="bg-white text-2xl flex flex-col items-center justify-center w-full mx-0 ">
       {/* win/lose message display */}
       {winner && <WinLoseMessage winMessage={true} newGame={newGame} />}
       {loser && <WinLoseMessage winMessage={false} newGame={newGame} />}
