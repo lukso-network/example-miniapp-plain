@@ -32,8 +32,8 @@ Open your browser and go to http://localhost:5173 to play the game!
 
 ## Project Structure
 
-- `src/context/GridProvider.tsx`: Core UP Provider implementation and wallet connection logic.
-- `src/hooks/useSmartContract.tsx`: It contains the logic to interact with the blockchain, with ethers.js or with GridProvider.
+- `src/context/UpProvider.tsx`: Core UP Provider implementation and wallet connection logic.
+- `src/hooks/useSmartContract.tsx`: It contains the logic to interact with the blockchain, with ethers.js or with UpProvider.
 - `src/components/`: All Components used to build the HangmanGame.
 - `src/view/`: Is the interface that you see when you start the game.
 
