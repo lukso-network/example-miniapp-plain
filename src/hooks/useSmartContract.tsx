@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import { BrowserProvider, Contract, ethers, JsonRpcSigner } from "ethers";
 import lsp7Json from "../json/lsp7/lsp7.json";
-import { useGrid } from "../context/GridProvider";
+import { useUpProvider } from "../context/UpProvider";
 
 export const useSmartContract = () => {
-  const { client, contextAccounts, walletConnected } = useGrid();
+  const { client, contextAccounts, walletConnected } = useUpProvider();
 
   const getProvider = async (): Promise<BrowserProvider> => {
     if (!window.lukso) {
