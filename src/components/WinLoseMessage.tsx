@@ -22,23 +22,21 @@ function WinLoseMessage({ winMessage, newGame }: Props) {
   }, [winMessage]);
 
   return (
-    <div className="absolute z-20 w-full h-full flex items-center justify-center bg-white">
-      <div className="flex flex-col items-center justify-center rounded-2xl ">
-        <h1
-          className={`${
-            winMessage ? "text-[#233742]" : "text-[#233742]"
-          } text-3xl font-bold mb-5`}
-        >
-          {winMessage ? "Congrats you won! 😸" : "Sorry you lost! 😿"}
-        </h1>
+    <div className="absolute z-20 w-full flex-col h-full flex items-center justify-center bg-white">
+      <h1
+        className={`${
+          winMessage ? "text-[#233742]" : "text-[#233742]"
+        } text-3xl font-bold mb-5`}
+      >
+        {winMessage ? "Congrats you won! 😸" : "Sorry you lost! 😿"}
+      </h1>
 
-        <button
-          className="bg-[#233742] text-white px-4 py-1 rounded-full mb-5"
-          onClick={newGame}
-        >
-          {winMessage ? "New Game" : "Restart"}
-        </button>
-      </div>
+      <button
+        className="bg-[#233742] text-white px-4 py-1 rounded-full mb-5"
+        onClick={newGame}
+      >
+        {winMessage ? "New Game" : "Restart"}
+      </button>
     </div>
   );
 }
