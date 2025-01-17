@@ -151,7 +151,7 @@ export function UpProvider({ children }: UpProviderProps) {
       }}
     >
       <div className="bg-gradient-to-b from-black to-gray-900 min-h-screen flex items-center justify-center">
-        <div className="w-full max-w-md p-8">{children}</div>
+        <div className="w-full max-w-md">{children}</div>
       </div>
     </UpContext.Provider>
   );
