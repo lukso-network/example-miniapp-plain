@@ -60,3 +60,4 @@ open your browser and go to http://localhost:5173 to play the game!
 ## Contributing
 
 Contributions are welcome! Feel free to submit issues and pull requests.
+
