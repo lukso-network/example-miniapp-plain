@@ -1,16 +1,17 @@
 # example-miniapp-vite-react-template
 
 A template project demonstrating how to build mini-apps on [LUKSO](https://lukso.network), interacting with Universal Profiles on Universal Everything, built with [Vite.js](https://vite.dev).
+For this project is foundamental to install the [up-provider package](https://github.com/lukso-network/tools-up-provider)
 
 # Introduction
 
-Welcome to the Hangman Game with blockchain integration! This single-player game combines the fun of Hangman with the power of LUKSO technology, offering an innovative experience where your achievements are recorded on the blockchain.
+Welcome to the Hangman game with blockchain integration! This single-player game combines the fun of Hangman with the power of LUKSO technology, offering an innovative experience where your achievements are recorded on the blockchain.
 
-The application use the Universal Profile ecosystem to authenticate users and interact with smart contracts. This ensures a secure and seamless experience.
+The application use the Universal Profile system to authenticate users and interact with smart contracts. This ensures a secure and seamless experience.
 
 # Features
 
-Login: Login on [Universal_Everithing](https://universaleverything.io) with your UP and use [TheGrid] to interact with the miniapp.
+Login: Login on [Universal Everithing](https://universaleverything.io) with your UP and use [TheGrid] to interact with the miniapp.
 
 Interactive Gameplay: Play the classic Hangman game with an engaging user interface.
 
@@ -27,8 +28,15 @@ npm install
 
 npm run dev
 
-Open your browser and go to http://localhost:5173 to play the game!
+open your browser and go to http://localhost:5173 to play the game!
 ```
+
+## How to integrate your project into The Grid
+
+    1.	Deploy your app. You can use Vercel or your favorite cloud platform.
+    2.	Go to Universal Everything and add new content to The Grid.
+    3.	Choose the “Website” option and paste the URL of your dApp. If you use [Vercel], you can refer to their documentation.
+    4.	Now you can see your dApp on The Grid! Let’s start playing!
 
 ## Project Structure
 
