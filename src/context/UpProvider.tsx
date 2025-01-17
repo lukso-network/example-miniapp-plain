@@ -150,20 +150,9 @@ export function UpProvider({ children }: UpProviderProps) {
         setIsSearching,
       }}
     >
-      {walletConnected ? (
-        <div className="bg-gradient-to-b from-black to-gray-900 min-h-screen flex items-center justify-center">
-          <div className="w-full max-w-md">{children}</div>
-        </div>
-      ) : (
-        <div className="text-center p-8 bg-black/20 backdrop-blur-sm rounded-xl border border-white/10 shadow-2xl animate-fade-in">
-          <h2 className="text-2xl font-semibold mb-3 text-white">
-            Welcome to Grid App
-          </h2>
-          <p className="text-gray-400">
-            Please connect your Universal Profile to continue.
-          </p>
-        </div>
-      )}
+      <div className=" min-h-screen flex items-center justify-center">
+        <div className="w-full max-w-md">{children}</div>
+      </div>
     </UpContext.Provider>
   );
 }
