@@ -1,7 +1,6 @@
 # example-miniapp-vite-react-template
 
-A template project demonstrating how to build mini-apps on [LUKSO](https://lukso.network), interacting with Universal Profiles on Universal Everything, built with [Vite.js](https://vite.dev).
-For this project is foundamental to install the [up-provider package](https://github.com/lukso-network/tools-up-provider)
+A template project demonstrating how to build mini-apps using the [up-provider package](https://github.com/lukso-network/tools-up-provider) and interacting with Universal Profiles on [Universal Everything](https://universaleverything.io), built with [Vite.js](https://vite.dev).
 
 # Introduction
 
