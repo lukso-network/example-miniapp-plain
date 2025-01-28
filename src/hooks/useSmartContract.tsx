@@ -46,27 +46,20 @@ export const useSmartContract = () => {
   const executeFunctionWithUProvider = useCallback(async () => {
     try {
       if (!client) {
-        console.log("Client or wallet is not connected.");
         return;
       }
       const contractAddress: `0x${string}` =
         "0x4E1Fe6B4085D79F5F500B835f3a2a56F27994338"; // Example of a custom smart contract LSP7 address already deployed
 
-      console.log("Initializing provider and signer...");
-
-      console.log("Creating contract instance...");
       const contract = await getContractInstance(contractAddress, client);
-      console.log("contract", contract);
       const data: string = contract.interface.encodeFunctionData("allCanMint"); // this is a custom function
 
-      console.log("Sending transaction...");
       const txResponse = await client.sendTransaction({
         account: accounts[0] as `0x${string}`,
         to: contractAddress as `0x${string}`,
         data: data,
       });
 
-      console.log("Transaction response:", txResponse);
     } catch (error) {
       console.error("Transaction failed:", error);
       return;
@@ -115,7 +108,6 @@ export const useSmartContract = () => {
         const contract = await getContractInstance(contractAddress, signer);
         const tx = await contract[functionName](...params);
         await tx.wait();
-        console.log("Transaction successful:", tx);
         return tx;
       } catch (error) {
         console.error("Transaction failed:", error);
