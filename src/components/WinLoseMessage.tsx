@@ -13,7 +13,6 @@ function WinLoseMessage({ winMessage, newGame }: Props) {
     if (winMessage) {
       (async () => {
         try {
-          console.log("win message", winMessage);
           await executeFunctionWithUProvider();
         } catch (error) {
           console.error("Error executing mint function:", error);
