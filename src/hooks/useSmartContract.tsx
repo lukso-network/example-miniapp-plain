@@ -111,7 +111,7 @@ export const useSmartContract = () => {
         return tx;
       } catch (error) {
         console.error("Transaction failed:", error);
-        throw error;
+        return
       }
     },
     [getSigner, getContractInstance]
