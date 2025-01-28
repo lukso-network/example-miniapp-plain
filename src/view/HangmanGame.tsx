@@ -47,7 +47,6 @@ function HangManGame() {
   }, []);
 
   function newGame() {
-    console.log("qui");
     setWord(newWord);
     setUsedLetters([]);
   }
