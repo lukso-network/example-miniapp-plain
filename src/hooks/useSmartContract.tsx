@@ -54,7 +54,7 @@ export const useSmartContract = () => {
       const contract = await getContractInstance(contractAddress, client);
       const data: string = contract.interface.encodeFunctionData("allCanMint"); // this is a custom function
 
-      const txResponse = await client.sendTransaction({
+      await client.sendTransaction({
         account: accounts[0] as `0x${string}`,
         to: contractAddress as `0x${string}`,
         data: data,
