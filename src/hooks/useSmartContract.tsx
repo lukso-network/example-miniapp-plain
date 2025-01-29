@@ -4,7 +4,7 @@ import lsp7Json from "../json/lsp7/lsp7.json";
 import { useUpProvider } from "../context/UpProvider";
 
 export const useSmartContract = () => {
-  const { client, walletConnected, accounts } = useUpProvider();
+  const { client, walletConnected, accounts, chainId } = useUpProvider();
 
   {
     /**
@@ -48,8 +48,13 @@ export const useSmartContract = () => {
       if (!client) {
         return;
       }
+      const contractAddressMainnet: `0x${string}` =
+        "0xA8Cb54517380B2df303BD00e8a512d478651ac4C";
+      const contractAddressTestnet: `0x${string}` =
+        "0x4E1Fe6B4085D79F5F500B835f3a2a56F27994338";
+
       const contractAddress: `0x${string}` =
-        "0x4E1Fe6B4085D79F5F500B835f3a2a56F27994338"; // Example of a custom smart contract LSP7 address already deployed
+        chainId === 42 ? contractAddressMainnet : contractAddressTestnet; // Example of a custom smart contract LSP7 address already deployed
 
       const contract = await getContractInstance(contractAddress, client);
       const data: string = contract.interface.encodeFunctionData("allCanMint"); // this is a custom function
@@ -60,7 +65,6 @@ export const useSmartContract = () => {
         data: data,
       });
       return txResponse;
-      
     } catch (error) {
       console.error("Transaction failed:", error);
       return;
@@ -112,7 +116,7 @@ export const useSmartContract = () => {
         return tx;
       } catch (error) {
         console.error("Transaction failed:", error);
-        return
+        return;
       }
     },
     [getSigner, getContractInstance]

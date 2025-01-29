@@ -17,8 +17,8 @@
 "use client";
 
 import { createClientUPProvider } from "@lukso/up-provider";
-import { createWalletClient, custom } from "viem";
-import { luksoTestnet } from "viem/chains";
+import { createWalletClient, custom, WalletClient } from "viem";
+import { luksoTestnet, lukso } from "viem/chains";
 import {
   createContext,
   useContext,
@@ -55,16 +55,9 @@ interface UpProviderProps {
 }
 
 export function UpProvider({ children }: UpProviderProps) {
+  const [client, setClient] = useState<WalletClient | null>(null);
   const [provider] = useState(() =>
     typeof window !== "undefined" ? createClientUPProvider() : null
-  );
-  const [client] = useState(() =>
-    typeof window !== "undefined" && provider
-      ? createWalletClient({
-          chain: luksoTestnet,
-          transport: custom(provider),
-        })
-      : null
   );
 
   const [chainId, setChainId] = useState<number>(0);
@@ -77,6 +70,17 @@ export function UpProvider({ children }: UpProviderProps) {
     null
   );
   const [isSearching, setIsSearching] = useState(false);
+
+  useEffect(() => {
+    if (provider) {
+      const newClient = createWalletClient({
+        chain: chainId === 42 ? lukso : luksoTestnet,
+        transport: custom(provider),
+      });
+
+      setClient(newClient);
+    }
+  }, [chainId]);
 
   useEffect(() => {
     let mounted = true;
@@ -118,7 +122,6 @@ export function UpProvider({ children }: UpProviderProps) {
       const chainChanged = (_chainId: number) => {
         setChainId(_chainId);
       };
-
       provider.on("accountsChanged", accountsChanged);
       provider.on("chainChanged", chainChanged);
       provider.on("contextAccountsChanged", contextAccountsChanged);
@@ -133,7 +136,7 @@ export function UpProvider({ children }: UpProviderProps) {
         provider.removeListener("chainChanged", chainChanged);
       };
     }
-  }, [client, provider, accounts.length, contextAccounts.length]);
+  }, [provider, accounts.length, contextAccounts.length]);
 
   return (
     <UpContext.Provider
