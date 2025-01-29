@@ -17,14 +17,15 @@
 "use client";
 
 import { createClientUPProvider } from "@lukso/up-provider";
-import { createWalletClient, custom } from "viem";
-import { luksoTestnet } from "viem/chains";
+import { createWalletClient, custom, WalletClient } from "viem";
+import { luksoTestnet, lukso } from "viem/chains";
 import {
   createContext,
   useContext,
   useEffect,
   useState,
   ReactNode,
+  useMemo,
 } from "react";
 
 interface UpProviderContext {
@@ -58,14 +59,6 @@ export function UpProvider({ children }: UpProviderProps) {
   const [provider] = useState(() =>
     typeof window !== "undefined" ? createClientUPProvider() : null
   );
-  const [client] = useState(() =>
-    typeof window !== "undefined" && provider
-      ? createWalletClient({
-          chain: luksoTestnet,
-          transport: custom(provider),
-        })
-      : null
-  );
 
   const [chainId, setChainId] = useState<number>(0);
   const [accounts, setAccounts] = useState<Array<`0x${string}`>>([]);
@@ -77,6 +70,16 @@ export function UpProvider({ children }: UpProviderProps) {
     null
   );
   const [isSearching, setIsSearching] = useState(false);
+
+  const client: WalletClient | null = useMemo(() => {
+    if (provider && chainId) {
+      return createWalletClient({
+        chain: chainId === 42 ? lukso : luksoTestnet,
+        transport: custom(provider),
+      });
+    }
+    return null;
+  }, [provider, chainId]);
 
   useEffect(() => {
     let mounted = true;
@@ -118,7 +121,6 @@ export function UpProvider({ children }: UpProviderProps) {
       const chainChanged = (_chainId: number) => {
         setChainId(_chainId);
       };
-
       provider.on("accountsChanged", accountsChanged);
       provider.on("chainChanged", chainChanged);
       provider.on("contextAccountsChanged", contextAccountsChanged);
