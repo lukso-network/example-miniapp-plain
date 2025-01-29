@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { BrowserProvider, Contract, ethers, JsonRpcSigner } from "ethers";
 import lsp7Json from "../json/lsp7/lsp7.json";
 import { useUpProvider } from "../context/UpProvider";
+import { lukso } from "viem/chains";
 
 export const useSmartContract = () => {
   const { client, walletConnected, accounts, chainId } = useUpProvider();
@@ -54,7 +55,7 @@ export const useSmartContract = () => {
         "0x4E1Fe6B4085D79F5F500B835f3a2a56F27994338";
 
       const contractAddress: `0x${string}` =
-        chainId === 42 ? contractAddressMainnet : contractAddressTestnet; // Example of a custom smart contract LSP7 address already deployed
+        chainId === lukso.id ? contractAddressMainnet : contractAddressTestnet; // Example of a custom smart contract LSP7 address already deployed
 
       const contract = await getContractInstance(contractAddress, client);
       const data: string = contract.interface.encodeFunctionData("allCanMint"); // this is a custom function
