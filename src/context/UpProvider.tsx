@@ -25,6 +25,7 @@ import {
   useEffect,
   useState,
   ReactNode,
+  useMemo,
 } from "react";
 
 interface UpProviderContext {
@@ -55,7 +56,6 @@ interface UpProviderProps {
 }
 
 export function UpProvider({ children }: UpProviderProps) {
-  const [client, setClient] = useState<WalletClient | null>(null);
   const [provider] = useState(() =>
     typeof window !== "undefined" ? createClientUPProvider() : null
   );
@@ -71,16 +71,15 @@ export function UpProvider({ children }: UpProviderProps) {
   );
   const [isSearching, setIsSearching] = useState(false);
 
-  useEffect(() => {
-    if (provider) {
-      const newClient = createWalletClient({
+  const client: WalletClient | null = useMemo(() => {
+    if (provider && chainId) {
+      return createWalletClient({
         chain: chainId === 42 ? lukso : luksoTestnet,
         transport: custom(provider),
       });
-
-      setClient(newClient);
     }
-  }, [chainId]);
+    return null;
+  }, [provider, chainId]);
 
   useEffect(() => {
     let mounted = true;
